@@ -1,0 +1,32 @@
+name: Workflow Debugger
+
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  USER_1: "foo"
+  USER_2: "bar"
+
+jobs:
+  debugger:
+    runs_on: ubuntu-latest
+    steps:
+      -name: checkout repo
+       uses: actions/checkout@v7
+
+      -name: set USER_1 as USERNAME
+       run: |
+        echo "USERNAME=$USER_1" >> $GITHUB_ENV
+
+
+      -namee: Print USERNAME
+       run: |
+        echo "USERNAME env variable value from previous step"
+        echo "USERNAME is $USERNAME"
+        exit 1
+
+      -name: Print USER_2 username
+       run: |
+        echo "USERNAME is $USER_2"
+
